@@ -5,6 +5,7 @@ using UnityEngine;
 public class ScriptNave : MonoBehaviour
 {
     Rigidbody2D MyRB;
+    bool posibleDisparo = true;
     public GameObject cohete;
     // Start is called before the first frame update
     void Start()
@@ -20,11 +21,12 @@ public class ScriptNave : MonoBehaviour
         float xPos = Mathf.Clamp(MyRB.position.x, -6.5f, 6.5f);
         transform.position = new Vector2(xPos, -7.0f);
 
-        if (Input.GetButton("Jump"))
+        if (Input.GetButton("Jump") && posibleDisparo)
         {
             GameObject disparo =Instantiate(cohete, new Vector2(MyRB.position.x, -5.75f), Quaternion.identity);
             Rigidbody2D RBdisparo = disparo.GetComponent<Rigidbody2D>();
             RBdisparo.velocity= (new Vector2(0f, 1f)*20);
+            posibleDisparo = false;
         }
     }
 }

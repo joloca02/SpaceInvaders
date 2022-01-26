@@ -23,10 +23,15 @@ public class ScriptNave : MonoBehaviour
 
         if (Input.GetButton("Jump") && posibleDisparo)
         {
-            GameObject disparo =Instantiate(cohete, new Vector2(MyRB.position.x, -5.75f), Quaternion.identity);
+            GameObject disparo =Instantiate(cohete, new Vector2(MyRB.position.x, -5.50f), Quaternion.identity);
             Rigidbody2D RBdisparo = disparo.GetComponent<Rigidbody2D>();
             RBdisparo.velocity= (new Vector2(0f, 1f)*20);
             posibleDisparo = false;
         }
+    }
+    public void reiniciarDisparo()
+    {
+        posibleDisparo = true;
+
     }
 }

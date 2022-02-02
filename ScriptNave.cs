@@ -13,24 +13,25 @@ public class ScriptNave : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MyRB = GetComponent<Rigidbody2D>();    
+        MyRB = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (canMove) { 
-        float movement = Input.GetAxis("Horizontal");
-        MyRB.velocity = transform.right * movement*15;
-        float xPos = Mathf.Clamp(MyRB.position.x, -6.5f, 6.5f);
-        transform.position = new Vector2(xPos, -7.0f);
+        if (canMove)
+        {
+            float movement = Input.GetAxis("Horizontal");
+            MyRB.velocity = transform.right * movement * 15;
+            float xPos = Mathf.Clamp(MyRB.position.x, -6.5f, 6.5f);
+            transform.position = new Vector2(xPos, -7.0f);
         }
 
         if (Input.GetButton("Jump") && posibleDisparo)
         {
-            GameObject disparo =Instantiate(cohete, new Vector2(MyRB.position.x, -5.50f), Quaternion.identity);
+            GameObject disparo = Instantiate(cohete, new Vector2(MyRB.position.x, -5.50f), Quaternion.identity);
             Rigidbody2D RBdisparo = disparo.GetComponent<Rigidbody2D>();
-            RBdisparo.velocity= (new Vector2(0f, 1f)*20);
+            RBdisparo.velocity = (new Vector2(0f, 1f) * 20);
             posibleDisparo = false;
         }
     }
@@ -48,7 +49,10 @@ public class ScriptNave : MonoBehaviour
         LooseText.SetActive(true);
         posibleDisparo = false;
         canMove = false;
-        GameObject.FindGameObjectWithTag("Enemigo").GetComponent<ScriptEnemigo>().canMove=false;
-
+        GameObject[] n = GameObject.FindGameObjectsWithTag("Enemigo");
+        for (int i = 0; i < n.Length; i++)
+        {
+            n[i].GetComponent<ScriptEnemigo>().canMove = false;
+        }
     }
 }

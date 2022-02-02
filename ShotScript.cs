@@ -6,13 +6,13 @@ public class ShotScript : MonoBehaviour
 {
   
     ScriptNave scriptNave;
-    GameObject Enemigo;
+    GameObject[] Enemigos;
     GameObject text;
     // Start is called before the first frame update
     void Start()
     {
         text = GameObject.FindGameObjectWithTag("TextWin");
-        Enemigo = GameObject.FindGameObjectWithTag("Enemigo"); 
+        Enemigos = GameObject.FindGameObjectsWithTag("Enemigo"); 
         scriptNave = GameObject.FindGameObjectWithTag("Nave").GetComponent<ScriptNave>();
     }
 
@@ -24,17 +24,22 @@ public class ShotScript : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Enemigo != null) { 
-        if (Enemigo.GetComponent<Collider2D>() == collision)
-        {
-            Destroy(Enemigo);
-                scriptNave.activateWinText();
-                scriptNave.canMove = false;
-                scriptNave.posibleDisparo = false;
-            }
-        }
         Destroy(gameObject);
         scriptNave.reiniciarDisparo();
-    }
+        for (int i = 0; i < Enemigos.Length; i++) { 
+        if (Enemigos.Length!=0) { 
+        if (Enemigos[i].GetComponent<Collider2D>() == collision)
+        {
+            Destroy(Enemigos[i]);
+                    if (Enemigos.Length == 1)
+                    {
+                        scriptNave.activateWinText();
+                        scriptNave.canMove = false;
+                        scriptNave.posibleDisparo = false;
+                    }
+            }
+        }
 
+    }
+    }
 }

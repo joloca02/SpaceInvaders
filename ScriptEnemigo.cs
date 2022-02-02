@@ -6,6 +6,7 @@ public class ScriptEnemigo : MonoBehaviour
 {
     float rate = 1f;
     bool limite = false;
+    public bool canMove = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +32,12 @@ public class ScriptEnemigo : MonoBehaviour
         {
             transform.Translate(Vector3.left);
         }
-        rate *= 0.9f;
+        rate = 0.1f;
         InvokeRepeating("Movimiento", rate, rate);
     }
     void Movimiento()
     {
+        if (canMove) { 
         if (limite == false)
         {
             
@@ -57,4 +59,5 @@ public class ScriptEnemigo : MonoBehaviour
             }
         }
     }
+}
 }

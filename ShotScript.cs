@@ -22,7 +22,6 @@ public class ShotScript : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Ha habido colision");
         if (Enemigo != null) { 
         if (Enemigo.GetComponent<Collider2D>() == collision)
         {

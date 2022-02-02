@@ -6,7 +6,9 @@ public class ScriptNave : MonoBehaviour
 {
     Rigidbody2D MyRB;
     bool posibleDisparo = true;
+    bool canMove = true;
     public GameObject cohete;
+    public GameObject text;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,10 +18,12 @@ public class ScriptNave : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (canMove) { 
         float movement = Input.GetAxis("Horizontal");
         MyRB.velocity = transform.right * movement*15;
         float xPos = Mathf.Clamp(MyRB.position.x, -6.5f, 6.5f);
         transform.position = new Vector2(xPos, -7.0f);
+        }
 
         if (Input.GetButton("Jump") && posibleDisparo)
         {
@@ -32,6 +36,14 @@ public class ScriptNave : MonoBehaviour
     public void reiniciarDisparo()
     {
         posibleDisparo = true;
+
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        text.SetActive(true);
+        posibleDisparo = false;
+        canMove = false;
+        GameObject.FindGameObjectWithTag("Enemigo").GetComponent<ScriptEnemigo>().canMove=false;
 
     }
 }

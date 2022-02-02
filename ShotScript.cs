@@ -7,9 +7,11 @@ public class ShotScript : MonoBehaviour
   
     ScriptNave scriptNave;
     GameObject Enemigo;
+    GameObject text;
     // Start is called before the first frame update
     void Start()
     {
+        text = GameObject.FindGameObjectWithTag("TextWin");
         Enemigo = GameObject.FindGameObjectWithTag("Enemigo"); 
         scriptNave = GameObject.FindGameObjectWithTag("Nave").GetComponent<ScriptNave>();
     }
@@ -26,7 +28,10 @@ public class ShotScript : MonoBehaviour
         if (Enemigo.GetComponent<Collider2D>() == collision)
         {
             Destroy(Enemigo);
-        }
+                scriptNave.activateWinText();
+                scriptNave.canMove = false;
+                scriptNave.posibleDisparo = false;
+            }
         }
         Destroy(gameObject);
         scriptNave.reiniciarDisparo();

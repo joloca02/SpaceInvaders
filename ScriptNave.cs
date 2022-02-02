@@ -5,10 +5,11 @@ using UnityEngine;
 public class ScriptNave : MonoBehaviour
 {
     Rigidbody2D MyRB;
-    bool posibleDisparo = true;
-    bool canMove = true;
+    public bool posibleDisparo = true;
+    public bool canMove = true;
     public GameObject cohete;
-    public GameObject text;
+    public GameObject LooseText;
+    public GameObject WinText;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,9 +39,13 @@ public class ScriptNave : MonoBehaviour
         posibleDisparo = true;
 
     }
+    public void activateWinText()
+    {
+        WinText.SetActive(true);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        text.SetActive(true);
+        LooseText.SetActive(true);
         posibleDisparo = false;
         canMove = false;
         GameObject.FindGameObjectWithTag("Enemigo").GetComponent<ScriptEnemigo>().canMove=false;

@@ -32,7 +32,7 @@ public class ScriptEnemigo : MonoBehaviour
         {
             transform.Translate(Vector3.left);
         }
-        rate = 0.1f;
+        rate *=0.9f;
         InvokeRepeating("Movimiento", rate, rate);
     }
     void Movimiento()

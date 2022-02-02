@@ -6,10 +6,12 @@ public class ShotScript : MonoBehaviour
 {
   
     ScriptNave scriptNave;
+    GameObject Enemigo;
     // Start is called before the first frame update
     void Start()
     {
-       scriptNave = GameObject.FindGameObjectWithTag("Nave").GetComponent<ScriptNave>();
+        Enemigo = GameObject.FindGameObjectWithTag("Enemigo"); 
+        scriptNave = GameObject.FindGameObjectWithTag("Nave").GetComponent<ScriptNave>();
     }
 
     // Update is called once per frame
@@ -21,6 +23,12 @@ public class ShotScript : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Ha habido colision");
+        if (Enemigo != null) { 
+        if (Enemigo.GetComponent<Collider2D>() == collision)
+        {
+            Destroy(Enemigo);
+        }
+        }
         Destroy(gameObject);
         scriptNave.reiniciarDisparo();
     }
